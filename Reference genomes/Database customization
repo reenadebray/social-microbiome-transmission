@@ -9,7 +9,7 @@ dRep dereplicate -g $genomes --multiround_primary_clustering --extra_weight_tabl
 
 ## Create scaffold-to-bin file for inStrain
 ### dereplicated_genomes = list of 4712 species-representative genomes selected for database
-parse_stb.py --reverse -f $dereplicated_genomes -o $output.stb
+parse_stb.py --reverse -f $dereplicated_genomes -o $dereplicated_genomes.stb
 
 ## Build bowtie index 
 cat $dereplicated_genomes > $dereplicated_genomes.fasta
