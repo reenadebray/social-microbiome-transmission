@@ -1,0 +1,11 @@
+# Read trimming and host genome removal
+
+## Run Trimmomatic
+### forward = path to forward reads
+### reverse = path to reverse reads
+### sample = sample  name
+java -jar trimmomatic-0.39.jar PE $forward $reverse -baseout $sample.forward_paired.fq.gz $sample.forward_unpaired.fq.gz $sample.reverse_paired.fq.gz $sample.reverse_unpaired.fq.gz -threads 8 ILLUMINACLIP:NexteraPE-PE.fa:2:30:10 LEADING:5 TRAILING:5 SLIDINGWINDOW:5:20 MINLEN:70
+
+## Map reads to the baboon reference genome
+### host_genome = path to host reference genome (we used Panubis 1.0)
+bowtie2 -p 8 -x $host_genome -1 $sample.forward_paired.fq.gz -2 $sample.reverse_paired.fq.gz --un-conc clean_reads/$sample.R%.fastq -S host_reads/$sample.sam
