@@ -1,0 +1,4 @@
+# Using Mashtree to rapidly build phylogenies from microbial reference genomes
+
+## genomes = list of all genomes
+mashtree -numcpus 12 $genomes > $out_tree.dnd 
