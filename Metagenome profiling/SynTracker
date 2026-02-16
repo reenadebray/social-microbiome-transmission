@@ -1,10 +1,10 @@
 # Using SynTracker to assess strain sharing based on microsynteny
 
-## Assemble contigs from metagenomic reads
+## Assemble contigs from metagenomic reads with megahit (v1.2.9)
 ### forward = path to forward reads
 ### reverse = path to reverse reads
 megahit -1 $forward -2 $reverse -o assemblies/$sample
 
-## Run SynTracker on all samples
+## Run SynTracker (v1.4.0) on all samples
 ### dereplicated_genomes = path to folder with 4712 species-representative genomes selected for database
 python syntracker.py -target assemblies/ -ref $dereplicated_genomes -out $syntracker_out -length 2500 --identity 95
