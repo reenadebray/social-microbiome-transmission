@@ -1,8 +1,8 @@
 # Using genomeSPOT to predict traits based on genome sequence
 
-## run prodigal to annotate proteins
+## run prodigal (v2.6.3) to annotate proteins
 ### genome_path = path to fasta file
 prodigal -i $genome_path -a $genome.proteins.faa
 
-## run genomeSPOT
+## run genomeSPOT (v1.0.1)
 python -m genome_spot.genome_spot --models models --contigs $genome_path --proteins $genome.proteins.faa --output $genome.traits.out
