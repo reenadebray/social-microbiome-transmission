@@ -1,0 +1,14 @@
+# Using inStrain to generate individual metagenomic profiles and paired-sample strain comparisons
+
+## Map quality-controlled, host-filtered reads to microbial genome database
+### dereplicated_genomes_bowtie = bowtie index of 4712 species-representative microbial genomes
+### sample = name of sample
+bowtie2 -p 10 -x $dereplicated_genomes_bowtie -1 clean_reads/$sample.R1.fastq -2 clean_reads/$sample.R2.fastq --no-unal -S $sample.sam
+
+## Generate inStrain profiles
+### dereplicated_genomes.fasta = concatenated fasta file of all 4712 genomes
+### dereplicated_genomes.stb = scaffold-to-bin file created by dRep
+inStrain profile $sample.sam $dereplicated_genomes.fasta -o $sample.IS -p 32 -s $dereplicated_genomes.stb --database_mode --skip_mm
+
+## Compare inStrain files
+inStrain compare -i `ls -d *.IS` -s $dereplicated_genomes.stb -o IS.COMPARE --database_mode
