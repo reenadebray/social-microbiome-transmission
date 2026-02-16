@@ -1,0 +1,16 @@
+# Using dRep to select species-representative reference genomes from a combined total of 7632 microbial genomes (4647 from the human gut and 2985 from non-human primates)
+
+## run dRep
+### genomes = list of all 7632 genomes
+### extra_weights = tab-separated text file with genome names and weights
+#### we gave human-associated genomes a weight of 5 and non-human-primate-associated genomes a weight of 25
+#### this weighting preference picks non-human-primate genomes most of the time, unless the human genome is much better quality.
+dRep dereplicate -g $genomes --multiround_primary_clustering --extra_weight_table $extra_weights --checkM_method taxonomy_wf
+
+## Create scaffold-to-bin file for inStrain
+### dereplicated_genomes = list of 4712 species-representative genomes selected for database
+parse_stb.py --reverse -f $dereplicated_genomes -o $output.stb
+
+## Build bowtie index 
+cat $dereplicated_genomes > $dereplicated_genomes.fasta
+bowtie2-build $dereplicated_genomes.fasta $dereplicated_genomes_bowtie --large-index --threads 16
