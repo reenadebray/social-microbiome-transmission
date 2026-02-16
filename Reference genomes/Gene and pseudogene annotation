@@ -1,0 +1,10 @@
+# Using prokka and pseudofinder to annotate reference genomes
+
+## run prokka to annotate genes
+### genome = name of fasta file
+prokka --compliant --rfam $genome --outdir $genome.prokka.out --prefix $genome
+
+## run pseudofinder to identify candidate pseudogenes 
+### specifications: <65% or >135% reference gene length; OR adjacent fragments overlap 50% or more in BLAST hits; OR intergenic amino acid sequences with no ORF
+### db = protein database (we used uniprot_sprot)
+python3 pseudofinder.py annotate --genome $genome.prokka.out/$genome.gbk --outdir $genome.pseudo.out --outprefix $genome --database $db --threads 16
