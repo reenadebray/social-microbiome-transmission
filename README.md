@@ -21,5 +21,5 @@
 
 **_Transmission analysis_**: Scripts for identifying strain movement between individuals.
 
-  • Transmission: Custom R script to identify transmission events from strain comparison tables.
+  • Transmission.R: Custom R script to identify and filter transmission events from strain comparison tables.
 
