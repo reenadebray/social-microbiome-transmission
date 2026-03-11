@@ -18,3 +18,8 @@
   • inStrain: Profile strains based on average nucleotide identity.
   
   • SynTracker: Profile strains based on microsynteny.
+
+**_Transmission analysis_**: Scripts for identifying strain movement between individuals.
+
+  • Transmission: Custom R script to identify transmission events from strain comparison tables.
+
